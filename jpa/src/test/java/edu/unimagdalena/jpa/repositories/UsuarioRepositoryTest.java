@@ -19,6 +19,11 @@ class UsuarioRepositoryTest extends AbstractIntegrationDBTest {
         this.usuarioRepository = usuarioRepository;
     }
 
+    @BeforeEach
+    void setUp() {
+        usuarioRepository.deleteAll();
+    }
+
     void initUsuarios(){
         Usuario usuario = Usuario.builder()
                 .email("jv@unimgdalena.edu.co")
@@ -44,12 +49,7 @@ class UsuarioRepositoryTest extends AbstractIntegrationDBTest {
 
         usuarioRepository.flush();
     }
-
-    @BeforeEach
-    void setUp() {
-        usuarioRepository.deleteAll();
-    }
-
+   
     @Test
     void givenAnUser_whenSave_thenUserwithId(){
         // Given
@@ -68,8 +68,8 @@ class UsuarioRepositoryTest extends AbstractIntegrationDBTest {
 
         // Then
         assertThat(userSaved.getIdUsuario()).isNotNull();
-
     }
+
     @Test
     @DisplayName("dado un conjunto de usuarios al buscarlo todos obtenemos la lista de los usuarios en la base de datos")
     void shouldGetAllUsers(){
@@ -123,5 +123,4 @@ class UsuarioRepositoryTest extends AbstractIntegrationDBTest {
         assertThat(usuarios).isNotEmpty();
         assertThat(usuarios).first().hasFieldOrPropertyWithValue("nombre","Julian");
     }
-
 }

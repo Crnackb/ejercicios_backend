@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
+    
 }
